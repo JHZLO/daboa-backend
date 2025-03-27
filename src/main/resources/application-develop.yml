@@ -16,6 +16,12 @@ spring:
       hibernate:
         format_sql: true
 
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
+      password: ${REDIS_PASSWORD}
+
 minio:
   endpoint: ${MINIO_ENDPOINT}
   accessKey: ${MINIO_ACCESS_KEY}
