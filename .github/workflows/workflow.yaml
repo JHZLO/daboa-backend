@@ -31,6 +31,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      # gradlew 실행권한 부여
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+
       # gradle caching - 빌드 시간 향상
       - name: Gradle cashing
         uses: actions/cache@v3
