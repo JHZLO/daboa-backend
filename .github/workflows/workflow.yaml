@@ -75,8 +75,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            docker rmi -f ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGENAME }}:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGENAME }}:latest
-            cd /home/ubuntu/daboa
-            docker compose down
+            cd /home/ubuntu/daboa/docker/app
             docker compose up -d
             docker image prune -f
