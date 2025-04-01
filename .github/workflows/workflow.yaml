@@ -50,6 +50,10 @@ jobs:
       - name: dependency
         run: ./gradlew dependencies
 
+      # 테스트
+      - name: Run tests
+        run: ./gradlew test --no-daemon
+
       # gradle build, demon 사용 x
       - name: build
         run: ./gradlew build --no-daemon
