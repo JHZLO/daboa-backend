@@ -1,12 +1,8 @@
 name: CI/CD with Docker
 
 # event trigger
-# main이나 develop 브랜치에 push가 되었을 때 실행 / main에 pr되면 실행
+# main이나 develop 브랜치에 push가 되었을 때 실행
 on:
-  pull_request:
-    branches:
-      - main
-
   push:
     branches:
       - develop
