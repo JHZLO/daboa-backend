@@ -1,7 +1,14 @@
-# JDK 17 slim 이미지 사용
-FROM openjdk:17-jdk-slim
+FROM gradle:7.6-jdk17 as builder
 
-# 작업 디렉토리 설정
+WORKDIR /app
+
+COPY ./ ./
+
+RUN gradle clean build --no-daemon
+
+# APP
+FROM openjdk:17.0-slim
+
 WORKDIR /app
 
 # 타임존을 한국(KST)으로 설정
@@ -10,10 +17,9 @@ RUN apt-get update && apt-get install -y tzdata && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get clean
 
-# 빌드된 JAR 복사
-COPY build/libs/*.jar app.jar
+# 빌더 이미지에서 jar 파일만 복사
+COPY --from=builder /app/build/libs/daboa-1.0.jar app.jar
 
-ENV SPRING_PROFILES_ACTIVE=develop
+EXPOSE 8080
 
-# 실행 명령어
 ENTRYPOINT ["java", "-jar", "app.jar"]
